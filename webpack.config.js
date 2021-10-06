@@ -1,10 +1,9 @@
-const HtmlWebPackPlugin = require("html-webpack-plugin");
 const ModuleFederationPlugin = require("webpack/lib/container/ModuleFederationPlugin");
 
 const deps = require("./package.json").dependencies;
 module.exports = {
   output: {
-    publicPath: "http://localhost:3001/",
+    publicPath: "http://localhost:3003/",
   },
 
   resolve: {
@@ -12,7 +11,7 @@ module.exports = {
   },
 
   devServer: {
-    port: 3001,
+    port: 3003,
   },
 
   module: {
@@ -40,11 +39,11 @@ module.exports = {
 
   plugins: [
     new ModuleFederationPlugin({
-      name: "RocketScience",
+      name: "DevProfileOne",
       filename: "remoteEntry.js",
       remotes: {},
       exposes: {
-        "./NewComponentTemplate": "./src/components/NewComponentTemplate"
+        "./Profile": "./src/components/Profile",
       },
       shared: {
         ...deps,
@@ -56,7 +55,11 @@ module.exports = {
           singleton: true,
           requiredVersion: deps["react-dom"],
         },
+        "styled-components": {
+          singleton: true,
+          requiredVersion: deps["styled-components"],
+        },
       },
-    })
+    }),
   ],
 };
