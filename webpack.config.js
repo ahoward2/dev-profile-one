@@ -41,7 +41,6 @@ module.exports = {
     new ModuleFederationPlugin({
       name: "DevProfileOne",
       filename: "remoteEntry.js",
-      library: { type: "var", name: "DevProfileOne" },
       remotes: {},
       exposes: {
         "./Profile": "./src/components/Profile",
